@@ -105,7 +105,37 @@ const updateGroup = async (req, res) => {
     }
 }
 
+const searchGroup = async (req, res) => {
+    try {
+        const { group_number } = req.query;
+
+        const regExp = new RegExp(Number(group_number));
+
+        const query = {
+            $expr: {
+                $regexMatch: {
+                    input: { $toString: `$group_number` },
+                    regex: regExp,
+                },
+            }
+        };
+
+        const foundGroup = await Group.find(query);
+
+        res.status(200).json({
+            success: 1,
+            data: foundGroup
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: 0,
+            msg: err.message
+        })
+    }
+}
+
 exports.getAllGroups = getAllGroups;
 exports.createGroup = createGroup;
 exports.deleteGroup = deleteGroup;
 exports.updateGroup = updateGroup;
+exports.searchGroup = searchGroup;

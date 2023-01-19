@@ -13,7 +13,7 @@ const StudentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Groups'
     },
-    breakingRoules_id: {
+    breakingRules_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'BreakingRules'
     }

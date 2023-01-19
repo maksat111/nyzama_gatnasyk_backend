@@ -13,14 +13,14 @@ const BrekingRulesSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    time: {
-        type: Date,
-        default: Date.now
-    },
     note: {
         type: String,
         default: null
-    }
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
+    },
 });
 
 module.exports = mongoose.model("BreakingRules", BrekingRulesSchema);
