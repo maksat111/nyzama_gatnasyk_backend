@@ -23,7 +23,7 @@ router.post('/groups/create', auth, groupsController.createGroup);
 router.get('/groups', auth, groupsController.getAllGroups);
 
 //---------------------------------------------- Students Routes ---------------------------------------------- //
-router.get('/student/getGroups/:course', auth, studentController.getGroupsByCourse);
+router.get('/students/:group_id', auth, studentController.getGroupsByCourse);
 
 
 module.exports = router;
