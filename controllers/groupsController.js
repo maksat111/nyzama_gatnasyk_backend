@@ -38,6 +38,24 @@ const createGroup = async (req, res) => {
     }
 }
 
+
+
+const getAllGroups = async (req, res) => {
+    try {
+        const groups = await Group.find();
+        res.status(200).json({
+            success: 1,
+            data: groups
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: 0,
+            msg: err.message
+        })
+    }
+}
+
+
 const deleteGroup = async (req, res) => {
     try {
         const { group_id } = req.params;
@@ -58,21 +76,6 @@ const deleteGroup = async (req, res) => {
             success: 0,
             msg: err.message
         });
-    }
-}
-
-const getAllGroups = async (req, res) => {
-    try {
-        const groups = await Group.find();
-        res.status(200).json({
-            success: 1,
-            data: groups
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: 0,
-            msg: err.message
-        })
     }
 }
 
