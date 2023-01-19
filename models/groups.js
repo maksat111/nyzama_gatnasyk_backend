@@ -15,4 +15,4 @@ const GroupsSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Students", GroupSchema);
+module.exports = mongoose.model("Groups", GroupsSchema);
