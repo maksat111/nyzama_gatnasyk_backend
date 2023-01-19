@@ -49,5 +49,31 @@ const getStudentsByGroupId = async (req, res) => {
 
 }
 
+
+const deleteStudent = async (req, res) => {
+    try {
+        const { student_id } = req.params;
+        const foundStudent = await Student.findOne({ _id: student_id });
+
+        if (!foundStudent) {
+            return res.status(200).json({ success: 0, msg: 'No student in this id!' });
+        }
+
+        const deletedStudent = await Student.deleteOne({ _id: teacher_id });
+
+        res.status(200).json({
+            success: 1,
+            data: foundStudent
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: 0,
+            msg: err.message
+        });
+    }
+}
+
+
 exports.getStudentsByGroupId = getStudentsByGroupId;
 exports.createStudent = createStudent;
+exports.deleteStudent = deleteStudent;
