@@ -19,6 +19,7 @@ router.get('/teacher', auth, teacherController.getAllTeachers);
 router.delete('/teacher/delete/:teacher_id', auth, teacherController.deleteTeacher);
 
 //---------------------------------------------- Groups Routes ---------------------------------------------- //
+router.post('/groups/create', auth, groupsController.createGroup);
 router.get('/groups', auth, groupsController.getAllGroups);
 
 //---------------------------------------------- Students Routes ---------------------------------------------- //
