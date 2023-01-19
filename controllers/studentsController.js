@@ -77,6 +77,10 @@ const updateStudent = async (req, res) => {
         const { student_id } = req.params;
         const { name, surname, group_id } = req.body;
 
+        if (!name || !surname || group_id) {
+            return res.status(200).json({ success: 0, msg: 'All  field are required!' })
+        }
+
         let updatedStudent = await Student.findByIdAndUpdate(student_id, {
             name,
             surname,
