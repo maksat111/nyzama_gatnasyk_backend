@@ -11,7 +11,7 @@ const createGroup = async (req, res) => {
             })
         }
 
-        const foundGroup = await Group.findOne({ group_number, group_major, course });
+        const foundGroup = await Group.findOne({ group_number });
 
         if (foundGroup) {
             return res.status(200).json({
@@ -39,7 +39,6 @@ const createGroup = async (req, res) => {
 }
 
 
-
 const getAllGroups = async (req, res) => {
     try {
         const groups = await Group.find();
@@ -65,7 +64,7 @@ const deleteGroup = async (req, res) => {
             return res.status(200).json({ success: 0, msg: 'No Group in this id!' });
         }
 
-        const deletedGroup = await Teacher.deleteOne({ _id: teacher_id });
+        const deletedGroup = await Group.deleteOne({ _id: group_id });
 
         res.status(200).json({
             success: 1,
@@ -79,6 +78,34 @@ const deleteGroup = async (req, res) => {
     }
 }
 
+const updateGroup = async (req, res) => {
+    try {
+        const { group_id } = req.params;
+        const { group_number, group_major, course } = req.body;
+
+        let updatedGroup = await Group.findByIdAndUpdate(group_id, {
+            group_number,
+            group_major,
+            course
+        });
+
+        updatedGroup.group_number = group_number;
+        updatedGroup.group_major = group_major;
+        updatedGroup.course = course;
+
+        res.status(200).json({
+            success: 1,
+            data: updatedGroup
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: 0,
+            msg: err.message
+        })
+    }
+}
+
 exports.getAllGroups = getAllGroups;
 exports.createGroup = createGroup;
 exports.deleteGroup = deleteGroup;
+exports.updateGroup = updateGroup;
