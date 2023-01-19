@@ -12,6 +12,10 @@ const StudentSchema = new mongoose.Schema({
     group_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Groups'
+    },
+    breakingRoules_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BreakingRules'
     }
 });
 

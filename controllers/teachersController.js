@@ -75,6 +75,38 @@ const deleteTeacher = async (req, res) => {
     }
 }
 
+const updateTeacher = async (req, res) => {
+    try {
+        const { teacher_id } = req.params;
+        const { name, surname, username, password } = req.body;
+
+        const encryptedPassword = await bcrypt.hash(password, 10);
+
+        let updatedTeacher = await Teacher.findByIdAndUpdate(teacher_id, {
+            name,
+            surname,
+            username,
+            password: encryptedPassword
+        });
+
+        updatedTeacher.name = name;
+        updatedTeacher.surname = surname;
+        updatedTeacher.username = username;
+        updatedTeacher.password = encryptedPassword;
+
+        res.status(200).json({
+            success: 1,
+            data: updatedTeacher
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: 0,
+            msg: err.message
+        })
+    }
+}
+
 exports.createTeacher = createTeacher;
 exports.getAllTeachers = getAllTeachers;
 exports.deleteTeacher = deleteTeacher;
+exports.updateTeacher = updateTeacher;

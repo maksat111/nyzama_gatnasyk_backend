@@ -58,7 +58,7 @@ const deleteStudent = async (req, res) => {
             return res.status(200).json({ success: 0, msg: 'No student in this id!' });
         }
 
-        const deletedStudent = await Student.deleteOne({ _id: teacher_id });
+        const deletedStudent = await Student.deleteOne({ _id: student_id });
 
         res.status(200).json({
             success: 1,
@@ -75,19 +75,17 @@ const deleteStudent = async (req, res) => {
 const updateStudent = async (req, res) => {
     try {
         const { student_id } = req.params;
-        const { name, surname, group_id, course } = req.body;
+        const { name, surname, group_id } = req.body;
 
-        let updatedStudent = await Group.findByIdAndUpdate(student_id, {
+        let updatedStudent = await Student.findByIdAndUpdate(student_id, {
             name,
             surname,
             group_id,
-            course
         });
 
         updatedStudent.name = name;
         updatedStudent.surname = surname;
         updatedStudent.group_id = group_id;
-        updatedStudent.course = course;
 
         res.status(200).json({
             success: 1,
