@@ -9,9 +9,9 @@ const StudentSchema = new mongoose.Schema({
         type: String,
         required: [true, "Surname field must be filled!"]
     },
-    group: {
-        type: Number,
-        required: [true, "Group field must be filled!"]
+    group_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Groups'
     },
     course: {
         type: String,
