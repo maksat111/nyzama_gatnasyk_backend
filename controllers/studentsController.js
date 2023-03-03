@@ -1,8 +1,24 @@
 const Student = require('../models/students');
+const Group = require('../models/groups');
 
 const createStudent = async (req, res) => {
     try {
-        const { name, surname, group_id } = req.body;
+        const { name, surname, group, major, course } = req.body;
+
+        let group_id = await Group.findOne({ group_number: group });
+
+        if (!group_id) {
+            const newGroup = await Group.create({
+                group_number: group,
+                group_major: major,
+                course
+            });
+            group_id = newGroup._id;
+        }
+
+        if (group_id) {
+            group_id = group_id._id;
+        }
 
         const foundStudent = await Student.findOne({ name, surname, group_id });
 
