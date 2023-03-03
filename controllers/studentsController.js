@@ -34,7 +34,7 @@ const createStudent = async (req, res) => {
 const getStudentsByGroupId = async (req, res) => {
     try {
         const { group_id } = req.params;
-        const foundStudents = await Student.find({ group_id });
+        const foundStudents = await Student.find({ group_id }).populate('group_id');
         res.status(200).json({
             success: 1,
             data: foundStudents
