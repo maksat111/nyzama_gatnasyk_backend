@@ -13,6 +13,7 @@ const auth = require('../middlewares/auth');
 
 // -------------------------------------------- Authentication Routes --------------------------------------------- //
 router.post('/auth/login', authController.teacherLogin);
+router.post('/auth/create', authController.createTeacher);
 
 //---------------------------------------------- Teachers Routes -------------------------------------------------- //
 router.post('/teacher/create', auth, teacherController.createTeacher);

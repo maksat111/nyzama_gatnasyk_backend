@@ -1,8 +1,13 @@
 const BreakingRules = require('../models/brekingRules');
+const date = require('date-and-time');
 
 const createBreaking = async (req, res) => {
     try {
         const breakings = req.body;
+
+        breakings.forEach(element => {
+            element.created_at = date.format(new Date(), 'YYYY/MM/DD HH:mm:ss');
+        });
 
         const createdBreakings = await BreakingRules.insertMany(breakings);
 
@@ -20,18 +25,11 @@ const createBreaking = async (req, res) => {
 
 const getBreaking = async (req, res) => {
     try {
-        const { created_at, type } = req.query;
-        let foundBreakings = [];
+        const { created_at, group_id } = req.query;
 
-        if (type == 'late') {
-            foundBreakings = await BreakingRules.find({ created_at, late: true });
-        }
-
-        if (type == 'uniform') {
-            foundBreakings = await BreakingRules.find({ created_at, uniform: true });
-        }
-
-        res.status(200).json({ success: 1, data: foundBreakings });
+        const founded = await BreakingRules.find({ "created_at": { "$gte": created_at, "$lt": created_at } });
+        // console.log(date.format(new Date(), 'YYYY/MM/DD HH:mm:ss'));
+        res.send(founded)
     } catch (err) {
         res.status(500).json({
             success: 0,

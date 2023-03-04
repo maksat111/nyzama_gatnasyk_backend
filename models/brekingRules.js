@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const date = require('date-and-time');
 
 const BrekingRulesSchema = new mongoose.Schema({
     student_id: {
@@ -18,8 +19,8 @@ const BrekingRulesSchema = new mongoose.Schema({
         default: null
     },
     created_at: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: date.format(new Date(), 'YYYY/MM/DD'),
     },
 });
 
