@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const date = require('date-and-time');
 
-const BrekingRulesSchema = new mongoose.Schema({
+const BreakingRulesSchema = new mongoose.Schema({
     student_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Students'
@@ -20,8 +20,8 @@ const BrekingRulesSchema = new mongoose.Schema({
     },
     created_at: {
         type: String,
-        default: date.format(new Date(), 'YYYY/MM/DD'),
+        default: date.format(new Date(), 'YYYY-MM-DD'),
     },
 });
 
-module.exports = mongoose.model("BreakingRules", BrekingRulesSchema);
+module.exports = mongoose.model("BreakingRules", BreakingRulesSchema);
