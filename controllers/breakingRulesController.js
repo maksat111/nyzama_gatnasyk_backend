@@ -6,7 +6,7 @@ const createBreaking = async (req, res) => {
         const breakings = req.body;
 
         breakings.forEach(element => {
-            element.created_at = date.format(new Date(), 'YYYY/MM/DD HH:mm:ss');
+            element.created_at = date.format(new Date(), 'YYYY/MM/DD');
         });
 
         const createdBreakings = await BreakingRules.insertMany(breakings);
